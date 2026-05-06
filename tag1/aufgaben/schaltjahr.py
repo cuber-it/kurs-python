@@ -5,6 +5,8 @@
 jahr = input("Jahr: ")
 
 # V
+jahr = int(jahr)
 
 # A
-print("Ist Schaltjahr: ... True/False")
+ist_schaltjahr = (jahr % 4 == 0 and jahr % 100 != 0) or jahr % 400 == 0
+print(f"Ist Schaltjahr: {jahr} {ist_schaltjahr}")
