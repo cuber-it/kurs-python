@@ -7,5 +7,5 @@ def ask(prompt, default=""):
     root.withdraw()
     return simpledialog.askstring("Input", prompt, initialvalue=default)
 
-name = ask("Name?", "Max")
-print(name)
+name = ask("Name?")
+print(name, type(name))
