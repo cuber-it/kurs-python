@@ -6,12 +6,16 @@
 
 # E
 name = input("Name: ")
-groesse = input("Grösse in m: ")
-gewicht = input("Gewicht in kg: ")
+groesse = input("Grösse in m: ").replace(",", ".")
+gewicht = input("Gewicht in kg: ").replace(",", ".")
 
 # V
+bmi = None
 
+groesse = float(groesse)
+gewicht = float(gewicht)
 
+bmi = gewicht / (groesse ** 2)
 
 # A
-print(f"......")
+print(f"Ist gut: {bmi:.2f} - {18.5 <= bmi <= 24.9}")
