@@ -10,6 +10,7 @@ Onboarding-Tag: erste lauffähige Programme schreiben. Listen, Dictionaries und 
 - **Operatoren** – arithmetisch, Vergleich, logisch, Zuweisung
 - **Typkonvertierung** – `int()`, `float()`, `str()`, `bool()`
 - **Input / Output** – `input()`, `print()`
+- **Strings** – Slicing, Methoden (`.upper`, `.lower`, `.strip`, `.split`, `.replace`, `.find`), Immutability
 - **f-Strings** – Formatierung für die Ausgabe
 - **Kommentare** – `#`, kurz und zweckmäßig
 - **Sonderkapitel: Moderne Operatoren** – Anriss Walross-Operator `:=`
