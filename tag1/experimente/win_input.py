@@ -7,5 +7,8 @@ def ask(prompt, default=""):
     root.withdraw()
     return simpledialog.askstring("Input", prompt, initialvalue=default)
 
-name = ask("Name?")
-print(name, type(name))
+input = ask
+
+if __name__ == "__main__":
+    name = ask("Name?")
+    print(name, type(name))
