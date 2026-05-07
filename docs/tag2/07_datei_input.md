@@ -6,9 +6,22 @@ Dateien lesen ist eine Kernaufgabe. In Python: `open()` zum Öffnen, `with` als 
 
 ## Grundmuster
 
+# Old fashioned
+```python
+fd = open("daten.txt") # default: r, encoding default utf-8
+inhalt = fd.read()
+close(fd)
+```
+# Modern style
 ```python
 with open("daten.txt", "r", encoding="utf-8") as f:
     inhalt = f.read()
+```
+# Slurp - die Funktion zum lesen
+```python
+def readfile(fname, encoding="utf-8"):
+    with open(fname, "r", encoding=encoding) as f:
+        return f.read()
 ```
 
 - `"r"` — Modus „read" (Standard, kann weggelassen werden).
@@ -44,6 +57,10 @@ with open("daten.txt", "r", encoding="utf-8") as f:
 ```python
 with open("daten.txt", "r", encoding="utf-8") as f:
     zeilen = f.readlines()    # ['zeile1\n', 'zeile2\n', ...]
+
+oder
+
+zeilen = f.read().splitlines() # - da werden "\n" gleich mit entsorgt
 ```
 
 → Bequem, lädt aber alles in den Speicher.
@@ -109,4 +126,14 @@ with open(pfad, "w", encoding="utf-8") as f:
 # robuste Pfade
 from pathlib import Path
 p = Path(__file__).parent / "daten.txt"
+```
+## Anmerkung - chunkwise read für sehr grosse Dateien
+```python
+def read_chunks(path, size=4096):
+    with open(path, "rb") as f:
+        while chunk := f.read(size):
+            yield chunk
+
+for chunk in read_chunks("datei.bin"):
+    print(len(chunk))
 ```
