@@ -30,9 +30,12 @@ while True:
         ergebnis = zahl_1 / zahl_2
     else:
         print("Kenn ich nicht:", operator)
-        exit()
+        continue
 
     # A
     print(f"{zahl_1} {operator} {zahl_2} = {ergebnis}")
 
-    ....
+    if input("Weiter/Ende?").lower() == "ende":
+        break
+
+print("Auf Wiedersehen")
