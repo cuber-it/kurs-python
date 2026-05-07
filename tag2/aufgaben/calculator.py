@@ -9,33 +9,45 @@
 # Schritt 2: Der Benutzer kann das so lange laufen lassen, bis er exit eingibt,
 # Es werden immer Einzelberechnungen ausgeführt
 #
-# Und wenn der Benutzer Mist eingibt? -> dann passiert eben eine Exception, na und!
+# Schritt 3: Und wenn der Benutzer Mist eingibt? -> dann kümmern wir und darum,
+class IllegalOperatorError(Exception):
+    pass
 
 while True:
     # E
-    zahl_1 = float(input("Zahl 1: ").replace(",", "."))
-    zahl_2 = float(input("Zahl 2: ").replace(",", "."))
-    operator = input("+ - * /:")
+    try:
+        zahl_1 = input("Zahl 1: ").replace(",", ".")
+        zahl_2 = input("Zahl 2: ").replace(",", ".")
+
+        zahl_1 = float(zahl_1)
+        zahl_2 = float(zahl_2)
+
+        operator = input("+ - * /:")
+        if operator not in ["+", "-", "*", "/"]:
+            raise IllegalOperatorError()
 
     # V
-    ergebnis = None
+        ergebnis = None
 
-    if operator == '+':
-        ergebnis = zahl_1 + zahl_2
-    elif operator == '-':
-        ergebnis = zahl_1 - zahl_2
-    elif operator == '*':
-        ergebnis = zahl_1 * zahl_2
-    elif operator == '/':
-        ergebnis = zahl_1 / zahl_2
-    else:
-        print("Kenn ich nicht:", operator)
-        continue
+        if operator == '+':
+            ergebnis = zahl_1 + zahl_2
+        elif operator == '-':
+            ergebnis = zahl_1 - zahl_2
+        elif operator == '*':
+            ergebnis = zahl_1 * zahl_2
+        elif operator == '/':
+            ergebnis = zahl_1 / zahl_2
 
     # A
-    print(f"{zahl_1} {operator} {zahl_2} = {ergebnis}")
+        print(f"{zahl_1} {operator} {zahl_2} = {ergebnis}")
+    except ValueError:
+        print("Fehlerhafte Eingabe:", zahl_1, zahl_2)
+    except ZeroDivisionError:
+        print("Division durch 0, abgebrochen", zahl_1, zahl_2)
+    except IllegalOperatorError:
+        print("Unbekannter Operator:", operator)
 
-    if input("Weiter/Ende?").lower() == "ende":
+    if input("Weiter/Ende? ").lower() == "ende":
         break
 
 print("Auf Wiedersehen")
