@@ -80,6 +80,11 @@ re.sub(r"\D", "", "Tel: 030-1234567")    # '0301234567'
 
 # Eingabe in Großbuchstaben anonymisieren (alle Buchstaben -> X)
 re.sub(r"[A-Za-zÄÖÜäöü]", "X", "Hallo Welt")    # 'XXXXX XXXX'
+
+# Einfache IP-Adresse mit Zahlengruppen
+matches = re.finditer(r"\b(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})\b", text)
+for match in matches:
+    ...
 ```
 
 ## Stolpersteine

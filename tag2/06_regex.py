@@ -20,6 +20,7 @@ if treffer:
 text = "Telefon: 030-12345, Mobil: 0171-9876543"
 nummern = re.findall(r"\d+", text)
 print(nummern)            # ['030', '12345', '0171', '9876543']
+# (\+\d{2}|0)-?(\d{2,5})-(\d{4,8}) - findet auch mit Ländervorwahl!
 
 # --- Wichtigste Bausteine ---
 #
