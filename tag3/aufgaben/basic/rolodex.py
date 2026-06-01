@@ -69,6 +69,19 @@ while True:
     elif eingabe == "P":
         for row in rolo:
             print(row)
+    elif eingabe == "L":
+        try:
+            with open("rolo.csv") as fd:
+                data = fd.read().splitlines()
+                rolo = []
+
+                header = data[0].split(",")
+                for row in data[1:]:
+                    values = row.split(",")
+                    rolo.append(dict(zip(header, values)))
+                print("check")
+        except FileNotFoundError:
+            print("Datei nicht gefunden")
     elif eingabe == "S":
         if len(rolo) == 0:
             print("Nichts zu speichern. Abbruch!")
