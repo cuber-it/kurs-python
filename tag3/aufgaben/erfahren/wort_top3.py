@@ -22,8 +22,10 @@ Listen, Dicts und Sets sind toll."""
 # - Counter(woerter) bauen
 # - top = Counter(...).most_common(3)
 # ...
+worte = text.lower().replace(".", "").replace(",", "").split(" ")
+counter = Counter(worte)
+top = counter.most_common(3)
 
 # A (Ausgabe)
-# - for nr, (wort, anzahl) in enumerate(top, start=1):
-#       print(f"{nr}. {wort} ({anzahl} x)")
-# ...
+for nr, (wort, anzahl) in enumerate(top, start=1):
+    print(f"{nr}. {wort} ({anzahl} x)")
