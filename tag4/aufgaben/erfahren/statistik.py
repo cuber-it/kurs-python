@@ -27,3 +27,35 @@
 # mini, maxi, schnitt = statistik(7, 2, 9, 4)
 # print(f"min={mini}, max={maxi}, schnitt={schnitt}")
 # ...
+
+def min(*args):
+    result = args[0]
+
+    for x in args[1:]:
+        if x < result:
+            result = x
+    return result
+
+def max(*args):
+    result = args[0]
+    for x in args[1:]:
+        if x > result:
+            result = x
+    return result
+
+def sum(*args):
+    result = 0
+    for x in args:
+        result += x
+    return result
+
+def mean(*args):
+    if len(args) == 0:
+        raise ValueError("Leere Werte")
+    return sum(*args) / len(args)
+
+if __name__ == "__main__":
+    werte = [ -1, 0, 1, 2, 3, 4, 5]
+    print(max(-1, 0, 1, 2, 3, 4, 5))
+    print(min(*werte)) # * werte entpackt die Liste zu -1, 0, 1, 2, 3, 4, 5
+    print(sum(*werte))

@@ -6,38 +6,74 @@
 # AUSFÜHREN:
 #   python3 -m unittest -v test_statistik.py
 #
-# Schreibe mindestens diese Testfälle:
-#   1. statistik(7, 2, 9, 4)  -> min=2, max=9, schnitt=5.5
-#   2. eine einzelne Zahl     -> min=max=schnitt
-#   3. der leere Aufruf       -> dein definierter Sonderfall
-#
-# Tipps:
-#   - mehrere Rückgabewerte: erg = statistik(...); dann erg[0], erg[1], erg[2]
-#     ODER direkt entpacken: mini, maxi, schnitt = statistik(...)
-#   - assertEqual für die Vergleiche
-#   - bei Durchschnitt ggf. assertAlmostEqual (Fließkomma!)
-
 import unittest
-from statistik import statistik
+import statistik as stat
 
 
-class TestStatistik(unittest.TestCase):
+class TestMinMaxSum(unittest.TestCase):
 
-    def test_mehrere_zahlen(self):
-        mini, maxi, schnitt = statistik(7, 2, 9, 4)
-        # self.assertEqual(mini, 2)
-        # self.assertEqual(maxi, 9)
-        # self.assertAlmostEqual(schnitt, 5.5)
-        pass
+    def test_min_with_positive_numbers(self):
+        self.assertEqual(stat.min(3, 1, 7, 2), 1)
 
-    def test_eine_zahl(self):
-        # eine einzelne Zahl: min == max == schnitt
-        pass
+    def test_min_with_negative_numbers(self):
+        self.assertEqual(stat.min(-3, -1, -7, -2), -7)
 
-    def test_leer(self):
-        # der von dir definierte Sonderfall für statistik()
-        pass
+    def test_min_with_single_value(self):
+        self.assertEqual(stat.min(42), 42)
 
+    def test_max_with_positive_numbers(self):
+        self.assertEqual(stat.max(3, 1, 7, 2), 7)
+
+    def test_max_with_negative_numbers(self):
+        self.assertEqual(stat.max(-3, -1, -7, -2), -1)
+
+    def test_max_with_single_value(self):
+        self.assertEqual(stat.max(42), 42)
+
+    def test_sum_with_positive_numbers(self):
+        self.assertEqual(stat.sum(1, 2, 3, 4), 10)
+
+    def test_sum_with_negative_numbers(self):
+        self.assertEqual(stat.sum(-1, -2, -3), -6)
+
+    def test_sum_with_mixed_numbers(self):
+        self.assertEqual(stat.sum(-5, 10, -2), 3)
+
+    def test_sum_with_single_value(self):
+        self.assertEqual(stat.sum(42), 42)
+
+    def test_sum_without_values(self):
+        self.assertEqual(stat.sum(), 0)
+
+    def test_min_without_values_raises_error(self):
+        with self.assertRaises(IndexError):
+            stat.min()
+
+    def test_max_without_values_raises_error(self):
+        with self.assertRaises(IndexError):
+            stat.max()
+
+    def test_mean_with_positive_numbers(self):
+        self.assertEqual(stat.mean(1, 2, 3), 2)
+
+    def test_mean_with_single_value(self):
+        self.assertEqual(stat.mean(42), 42)
+
+    def test_mean_with_negative_numbers(self):
+        self.assertEqual(stat.mean(-1, -2, -3), -2)
+
+    def test_mean_with_mixed_numbers(self):
+        self.assertEqual(stat.mean(-1, 1), 0)
+
+    def test_mean_with_float_result(self):
+        self.assertAlmostEqual(stat.mean(1, 2), 1.5)
+
+    def test_mean_with_zeroes(self):
+        self.assertEqual(stat.mean(0, 0, 0), 0)
+
+    def test_mean_without_values_raises_error(self):
+        with self.assertRaises(ValueError):
+            stat.mean()
 
 if __name__ == "__main__":
     unittest.main()
