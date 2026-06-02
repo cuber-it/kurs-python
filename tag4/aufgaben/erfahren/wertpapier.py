@@ -16,7 +16,16 @@
 import statistik as stat
 
 def _csv_loader(fname):
-    pass
+    result = []
+    with open(fname) as fd:
+        daten = fd.read().splitlines()
+        for row in daten[1:]:
+            row = row.replace(" ", "").replace("$", "").split(",")
+            result.append({
+                "date": row[0],
+                "close": float(row[1])
+            })
+    return result
 
 def _sqlite_loader(fname):
     pass
@@ -33,6 +42,8 @@ def import_daten(source, type):
     result = None
     if type.upper() == "LISTE":
         result = source
+    elif type.upper() == "CSV":
+        result = _csv_loader(source)
     else:
         raise ValueError(f"Unbekannte Datentyp {type}")
     return result
@@ -73,7 +84,7 @@ def gleitender_durchschnitt(daten, fenster):
     ergebnis = []
     for i in range(len(kurse) - fenster + 1):
         ausschnitt = kurse[i:i + fenster]
-        ergebnis.append(round(stat.sum(*ausschnitt) / fenster, 2))
+        ergebnis.append(round(stat.sum(*ausschnitt) / fenster, 20))
     return ergebnis
 
 
@@ -91,13 +102,14 @@ def bester_tag(daten):
 
 # Selbsttest – läuft nur bei direktem Start (python3 wertpapier.py)
 if __name__ == "__main__":
-    test = import_daten(
-        [{"date": "2024-01-01", "close": 100.0},
-         {"date": "2024-01-02", "close": 110.0},
-         {"date": "2024-01-03", "close": 105.0},
-        ],
-        "liste"
-    )
+    fname = r"/home/ucuber/Workspace/kurse/kurs-python/materialien/HistoricalQuotes.csv"
+    test = import_daten(fname, "CSV")
+#       [{"date": "2024-01-01", "close": 100.0},
+#         {"date": "2024-01-02", "close": 110.0},
+#         {"date": "2024-01-03", "close": 105.0},
+#        ],
+#        "liste"
+#    )
     print("schlusskurse:", schlusskurse(test))      # [100.0, 110.0, 105.0]
     print("rendite 100->110:", rendite(100, 110))   # 10.0
     print("hoch/tief:", hoechstkurs(test), tiefstkurs(test))  # 110.0 100.0
