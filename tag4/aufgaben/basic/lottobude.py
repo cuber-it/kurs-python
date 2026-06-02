@@ -57,6 +57,8 @@ def report(tipp, ziehung, ergebnis):
 if __name__ == "__main__":
     eingabe = get_input()
     tipp = erzeuge_tipp(eingabe)
-    ziehung = get_ziehung()
-    ergebnis = werte_aus(tipp,ziehung)
-    report(tipp, ziehung, ergebnis)
+    anzahl_spiele = int(input("Anzahl Spiele: "))
+    for _ in range(anzahl_spiele): # _ heisst hier muss zwar was stehen, aber es interessiert mich nicht
+        ziehung = get_ziehung()
+        ergebnis = werte_aus(tipp,ziehung)
+        report(tipp, ziehung, ergebnis)
