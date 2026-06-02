@@ -13,38 +13,54 @@
 # AUFGABE: Fülle die folgenden Funktionen aus. Jede gibt etwas ZURÜCK (return).
 # Schreibe Docstrings. Denke an Sonderfälle (leere Liste, Division durch 0).
 # ---------------------------------------------------------------------------
+import statistik as stat
+
+def _csv_loader(fname):
+    pass
+
+def _sqlite_loader(fname):
+    pass
 
 def import_daten(source, type):
-    pass
+    """
+    lädt Daten aus der Source
+    es sind erlaubt: "liste", "csv-Dateiname", "sqlite-DB-name"
+    type-Kennung "liste", "csv", "sqlite"
+
+    je nach type wird die source geladen, und dann als Liste von Dict = Kursdaten zurückgegeben
+
+    """
+    result = None
+    if type.upper() == "LISTE":
+        result = source
+    else:
+        raise ValueError(f"Unbekannte Datentyp {type}")
+    return result
 
 def schlusskurse(daten):
     """Liste nur der Schlusskurse (close) aus den Datensätzen."""
     # Tipp: List Comprehension über daten -> d["close"]
-    pass
-
+    return [d["close"] for d in daten]
 
 def rendite(kurs_alt, kurs_neu):
-    """Prozentuale Rendite von kurs_alt auf kurs_neu.
-    Beispiel: rendite(100, 110) -> 10.0
-    """
-    # Tipp: (neu - alt) / alt * 100 ; Sonderfall alt == 0 abfangen
-    pass
+    if kurs_alt == 0:
+        return 0.0
+    return (kurs_neu - kurs_alt) / kurs_alt * 100
 
 
 def hoechstkurs(daten):
     """Höchsten Schlusskurs zurückgeben (Tipp: max über schlusskurse)."""
-    pass
+    return stat.max(*schlusskurse(daten))
 
 
 def tiefstkurs(daten):
     """Niedrigsten Schlusskurs zurückgeben."""
-    pass
+    return stat.min(*schlusskurse(daten))
 
 
 def durchschnitt(daten):
     """Durchschnittlicher Schlusskurs, auf 2 Stellen gerundet."""
-    # Tipp: sum(...) / len(...) ; leere Liste abfangen
-    pass
+    return stat.mean(*schlusskurse(daten))
 
 
 def gleitender_durchschnitt(daten, fenster):
@@ -53,14 +69,24 @@ def gleitender_durchschnitt(daten, fenster):
     Ergebnislänge = len(daten) - fenster + 1
     """
     # Tipp: über die Schlusskurse slicen: kurse[i:i+fenster], davon der Schnitt
-    pass
+    kurse = [d["close"] for d in daten]
+    ergebnis = []
+    for i in range(len(kurse) - fenster + 1):
+        ausschnitt = kurse[i:i + fenster]
+        ergebnis.append(round(stat.sum(*ausschnitt) / fenster, 2))
+    return ergebnis
 
 
 def bester_tag(daten):
     """Dict des Tages mit dem höchsten Schlusskurs (mit date + close).
     Tipp: max(daten, key=lambda d: d["close"])
     """
-    pass
+    hoechster = hoechstkurs(daten)   # erst das Maximum
+    treffer = []
+    for d in daten: # dann alle passenden Tage
+        if d["close"] >= hoechster:
+            treffer.append(d["date"])
+    return hoechster, treffer
 
 
 # Selbsttest – läuft nur bei direktem Start (python3 wertpapier.py)
