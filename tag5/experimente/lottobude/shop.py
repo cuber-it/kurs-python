@@ -1,7 +1,7 @@
-import ausgabe
-import eingabe
-import ziehung
-import tippschein
+import tag5.experimente.lottobude.ausgabe as ausgabe
+import tag5.experimente.lottobude.eingabe as eingabe
+import tag5.experimente.lottobude.ziehung as ziehung
+import tag5.experimente.lottobude.tippschein as tippschein
 
 
 class Shop:
