@@ -41,3 +41,28 @@
 # print(r.umfang())        # 14
 # print(r.ist_quadrat())   # False
 # print(Rechteck(5, 5).ist_quadrat())   # True
+
+class Rechteck:
+    def __init__(self, breite, hoehe):
+        self.breite = breite
+        self.hoehe = hoehe
+
+    def flaeche(self):
+        return self.breite * self.hoehe
+
+    def umfang(self):
+        return 2 * (self.breite + self.hoehe)
+
+    def ist_quadrat(self):
+        return self.breite == self.hoehe
+
+    def __str__(self):
+        return f"Rechteck {self.breite}x{self.hoehe}"
+
+if __name__ == "__main__":
+    r = Rechteck(4, 3)
+    print(r)                              # Rechteck 4x3
+    print(r.flaeche())                    # 12
+    print(r.umfang())                     # 14
+    print(r.ist_quadrat())                # False
+    print(Rechteck(5, 5).ist_quadrat())   # True
