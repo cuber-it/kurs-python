@@ -1,0 +1,5 @@
+Deutsche Bank	A	4500000
+Müller GmbH	BB	1200000
+Acme Corp	CCC	8000000
+Stadtwerke Nord	AA	600000
+Helios AG	BBB	5500000
