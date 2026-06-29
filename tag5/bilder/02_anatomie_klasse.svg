@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="262" viewBox="0 0 680 262" font-family="Inter, 'Segoe UI', Arial, sans-serif">
+  <title>Anatomie einer Klasse</title>
+  <desc>Ein Code-Ausschnitt einer Klasse Konto mit Beschriftungen fuer Klasse, Konstruktor, Attribut und Methode.</desc>
+  <defs>
+    <marker id="dot" viewBox="0 0 6 6" refX="3" refY="3" markerWidth="6" markerHeight="6">
+      <circle cx="3" cy="3" r="2.5" fill="#888780"/>
+    </marker>
+  </defs>
+
+  <rect x="40" y="42" width="380" height="196" rx="10" fill="#F4F3EE" stroke="#D3D1C7" stroke-width="1"/>
+  <g font-family="'JetBrains Mono', Consolas, monospace" font-size="13" fill="#2C2C2A">
+    <text x="58" y="74">class Konto:</text>
+    <text x="58" y="100">    def __init__(self, inhaber, stand=0):</text>
+    <text x="58" y="126">        self.inhaber = inhaber</text>
+    <text x="58" y="150">        self.stand = stand</text>
+    <text x="58" y="190">    def einzahlen(self, betrag):</text>
+    <text x="58" y="214">        self.stand += betrag</text>
+  </g>
+
+  <line x1="424" y1="69" x2="452" y2="69" stroke="#888780" stroke-width="0.75" stroke-dasharray="2 2" marker-start="url(#dot)"/>
+  <text x="458" y="73" font-size="13" font-weight="500" fill="#3C3489">Klasse &#8211; der Bauplan</text>
+
+  <line x1="424" y1="95" x2="452" y2="103" stroke="#888780" stroke-width="0.75" stroke-dasharray="2 2" marker-start="url(#dot)"/>
+  <text x="458" y="107" font-size="13" font-weight="500" fill="#0C447C">__init__ &#8211; Konstruktor</text>
+
+  <line x1="424" y1="121" x2="452" y2="137" stroke="#888780" stroke-width="0.75" stroke-dasharray="2 2" marker-start="url(#dot)"/>
+  <text x="458" y="141" font-size="13" font-weight="500" fill="#085041">self.x &#8211; Attribut des Objekts</text>
+
+  <line x1="424" y1="185" x2="452" y2="195" stroke="#888780" stroke-width="0.75" stroke-dasharray="2 2" marker-start="url(#dot)"/>
+  <text x="458" y="199" font-size="13" font-weight="500" fill="#712B13">Methode &#8211; Verhalten</text>
+</svg>
